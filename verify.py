@@ -7,8 +7,9 @@ def testHW(id_and_name, file, file_path) :
     print('測試', id_and_name)
     result = []
     global allTestData, students
-    Popen('javac -encoding cp950 "' +file+'"',  stdout=PIPE, stdin=PIPE, stderr=STDOUT, cwd=file_path)
-    Popen('javac -encoding utf8 "' +file+'"',  stdout=PIPE, stdin=PIPE, stderr=STDOUT, cwd=file_path)
+    Popen('javac -encoding cp950 "' +file+'"',  stdout=PIPE, stdin=PIPE, stderr=STDOUT, cwd=file_path, close_fds=True).communicate()
+    Popen('javac -encoding utf8 "' +file+'"',  stdout=PIPE, stdin=PIPE, stderr=STDOUT, cwd=file_path, close_fds=True).communicate()
+    
     if file[:file.find('.')] + '.class' not in os.listdir(file_path) :
         students[id_and_name] += ['編譯錯誤']
     else :
